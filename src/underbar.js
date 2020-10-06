@@ -100,6 +100,24 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array, isSorted, iterator) {
+    let result = [];
+    let alreadyUsed = {};
+    if (iterator) {
+      for (let index = 0; index < array.length; index++) {
+        if (!alreadyUsed[iterator(array[index])]) {
+          alreadyUsed[iterator(array[index])] = true;
+          result.push(array[index]);
+        }
+      }
+    } else {
+      for (let index = 0; index < array.length; index++) {
+        if (!alreadyUsed[array[index]]) {
+          alreadyUsed[array[index]] = true;
+          result.push(array[index]);
+        }
+      }
+    }
+    return result;
   };
 
 
